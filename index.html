@@ -1,12 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
     <script src="script.js"></script>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <h1>Hello World</h1>
+    <h1>Rock Paper Scissors Game</h1>
+    <h2>Pick a option:</h2>
+    <div id="selection">
+        <button class="selector" id="rockBtn">Rock</button>
+        <button class="selector" id="paperBtn">Paper</button>
+        <button class="selector" id="scissorBtn">Scissors</button>
+    </div>
+
+    <div id="resultBox">
+        <h3>Results</h3>
+    </div>
+
+    <script>
+
+        let playerSelection;
+        let computerSelection;
+
+        function getComputerChoice() {
+            let randomNumber = Math.floor(Math.random() * 3); // Utilizing Math.random to generate a random number between 0 and 1, multiplying it by 3 for the three choices, and using Math.floor to round down to a whole number.
+            let choices = ["Rock", "Paper", "Scissors"];
+            let choice = choices[randomNumber]; // Selecting the computer's choice based on the random number generated.
+            return choice;
+        }
+
+
+        function playRound(playerSelection, computerSelection) { 
+    
+            console.log("Player selected: ", playerSelection);
+            console.log("Computer selected: ", computerSelection);
+
+            if (playerSelection === computerSelection) {
+               return "It's a tie";
+            } else if (playerSelection === "rock" && computerSelection === "scissors" ||
+                playerSelection === "paper" && computerSelection === "rock" ||
+                playerSelection === "scissors" && computerSelection === "paper") {
+               return "you win";
+            } else {
+                return "you lost, computer won";
+            }
+        }
+
+        const allButtons = document.querySelectorAll('.selector');
+        console.log(allButtons); //showing the entire nodelist
+
+        allButtons.forEach(item =>{
+            item.addEventListener('click', (e) => {
+                console.log(e.target.textContent);
+                playerSelection = e.target.textContent.toLowerCase();
+                computerSelection = getComputerChoice().toLowerCase();
+                const love = "i love you"
+                const result = playRound(playerSelection, computerSelection);
+                console.log(result);
+
+                const resulter = document.getElementById('resultBox'); 
+
+                const playerResults = document.createElement('p');
+                playerResults.textContent = "Player chose: " + playerSelection;
+                playerResults.style.color = 'blue';
+
+                const computerResults = document.createElement('p');
+                computerResults.textContent = "Computer chose: " + computerSelection;
+                computerResults.style.color = 'black';
+
+                const info = document.createElement('p');
+                info.textContent = result;
+
+                resulter.appendChild(playerResults);
+                resulter.append(computerResults);
+                resulter.appendChild(info);
+            })
+        })
+
+    </script>
 </body>
 </html>
+
+
+ 

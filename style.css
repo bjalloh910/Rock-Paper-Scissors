@@ -1,0 +1,10 @@
+#resultBox{
+    background: rgb(198, 172, 176);
+    min-width: 300px;
+    min-height: 200px;
+    padding: 5px 10px;
+    margin: 10px;
+    color: purple;
+    text-align: center;
+    
+}
